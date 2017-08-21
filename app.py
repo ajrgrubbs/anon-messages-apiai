@@ -33,8 +33,14 @@ def _clean_message(message: str):
 def get_message():
     result = dict()
     if not messages:
-        result['speech'] = result['displayText'] = 'No messages'
+        result['speech'] = result['displayText'] = 'No messages remaining. Goodbye!'
+        result['data'] = {
+            'google': {
+                'expect_user_response': False
+            }
+        }
         return jsonify(result)
+
     result['speech'] = result['displayText'] = messages.popleft()
     return jsonify(result)
 
